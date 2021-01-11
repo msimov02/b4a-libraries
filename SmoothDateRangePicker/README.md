@@ -1,6 +1,6 @@
 # SmoothDateRangePicker
 
-SmoothDateRangePicker is a B4A library for selecting date range.
+SmoothDateRangePicker is a library for selecting date range.
 
 ![SmoothDateRangePicker](https://i.imgur.com/yzQehTj.png)
 
