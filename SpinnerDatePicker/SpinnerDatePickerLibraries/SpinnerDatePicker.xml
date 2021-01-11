@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <doclet-version-NOT-library-version>1.07</doclet-version-NOT-library-version>
+    <class>
+        <name>com.microinvest.spinnerdatepickerlibrarywrapper.SpinnerDatePickerWrapper</name>
+        <shortname>SpinnerDatePicker</shortname>
+        <owner>activity</owner>
+        <event>DateSelected (Year As Int, Month As Int, Day As Int)</event>
+        <event>DateSelectionCanceled</event>
+        <method>
+            <name>ShowDatePickDialog</name>
+            <comment></comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>year</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>monthOfYear</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>dayOfMonth</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>title</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Initialize</name>
+            <comment></comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>ba</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>EventName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+    </class>
+    <version>0.01</version>
+    <dependsOn>SpinnerDatePickerLibrary.aar</dependsOn>
+</root>
