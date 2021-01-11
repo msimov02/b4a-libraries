@@ -2,8 +2,8 @@
 
 DayView is a B4A library that shows the specific day in a calendar board view.
 
-![DayView](https://i.ibb.co/m4yBPkM/DayView.png)
-![DayView](https://i.ibb.co/KhbB2z0/DayView2.png)
+![DayView](https://i.ibb.co/t2KkjTS/DayView.png)
+![DayView](https://i.ibb.co/LJSjt32/DayView2.png)
 
 ## Usage
 1. Copy all the files from DayViewLibraris and paste them inside your B4A Additional Libraries folder.
