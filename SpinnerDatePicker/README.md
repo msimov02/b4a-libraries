@@ -1,6 +1,6 @@
 # SpinnerDatePicker
 
-SpinnerDatePicker is a B4A library for selecting date with a spinner style.
+SpinnerDatePicker is a library for selecting date with a spinner style dialog.
 
 ![SpinnerDatePicker](https://i.imgur.com/JX8m1Jv.png)
 
