@@ -1,9 +1,9 @@
 # FloatingActionButton
 
-FloatingActionButton is a B4A library which is used to represent the primary action of a screen.
+FloatingActionButton is a library which is used to represent the primary action of a screen.
 
-![FloatingActionButton](https://i.ibb.co/dsTVJGh/FloatingActionButton.png)
-![FloatingActionButton](https://i.ibb.co/nmD6vgZ/FloatingActionButton2.png)
+![FloatingActionButton](https://i.imgur.com/FlMxJCx.png)
+![FloatingActionButton](https://i.imgur.com/1DhG1wi.png)
 
 ## Usage
 1. Copy all the files from FloatingActionButtonLibraries and paste them inside your B4A Additional Libraries folder.
