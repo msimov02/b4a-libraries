@@ -1,3 +1,3 @@
 *.meta
-**/Objects
-**/AutoBackups
+**/Objects/*
+**/AutoBackups/*
