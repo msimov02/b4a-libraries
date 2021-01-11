@@ -1,10 +1,10 @@
 # FlipTabs
 
-FlipTabs is a B4A library that contains a 2-tab view that switches using flip animation.
+FlipTabs is a library that contains a 2-tab view that switches using flip animation.
 
-![FlipTabs](https://i.ibb.co/mTzVT82/FlipTabs.png)
+![FlipTabs](https://i.imgur.com/ZGDbFHY.png)
 
-![FlipTabs](https://i.ibb.co/FBzV4nJ/Flip-Tabs2.png)
+![FlipTabs](https://i.imgur.com/MV93zf0.png)
 
 ## Usage
 1. Copy all the files from FlipTabsLibraris and paste them inside your B4A Additional Libraries folder.
