@@ -19,7 +19,7 @@ import anywheresoftware.b4a.objects.collections.Map;
 
 @BA.ActivityObject
 @BA.Version(0.01F)
-@BA.DependsOn(values = {"FlipTabsLibrary.aar", "kotlin-stdlib-1.4.20.jar"})
+@BA.DependsOn(values = {"FlipTabsLibrary.androidx.aar", "kotlin-stdlib-1.4.20.jar"})
 @BA.Events(values = {"TabSelected (IsLeftTab as Boolean, TabTextValue as String)"})
 @BA.ShortName("FlipTabs")
 public class FlipTabsWrapper extends ViewWrapper<FlipTab> implements Common.DesignerCustomView{

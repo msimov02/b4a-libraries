@@ -15,6 +15,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
+import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 
@@ -80,7 +81,6 @@ public class MPLineChartWrapper extends ViewWrapper<LineChart> implements Common
     }
 
     public void SetXValues(final List<String> XValues) {
-        BA.Log(String.valueOf(XValues));
         getObject().getXAxis().setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float v, AxisBase axisBase) {
@@ -107,8 +107,9 @@ public class MPLineChartWrapper extends ViewWrapper<LineChart> implements Common
         LineDataSet set = new LineDataSet(values, title);
         set.setCircleColor(lineColor);
         set.setColor(lineColor);
-        set.setValueTextColor(lineColor);
+        set.setValueTextColor(textColor);
         set.setValueTextSize(textSize / 2);
+        set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         setTextColor(textColor);
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
