@@ -39,6 +39,7 @@ public class FlipTabsWrapper extends ViewWrapper<FlipTab> implements Common.Desi
                 public void onTabReselected(boolean b, String s) {
 
                 }
+
             });
         }
     }

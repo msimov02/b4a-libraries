@@ -15,8 +15,13 @@ import com.github.mikephil.charting.data.LineDataSet;
 
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
+import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.formatter.LargeValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 
 
 import java.util.ArrayList;
@@ -41,6 +46,31 @@ public class MPLineChartWrapper extends ViewWrapper<LineChart> implements Common
         if (!keepOldObject)
             setObject(new LineChart(ba.context));
         super.innerInitialize(ba, eventName, keepOldObject);
+
+        getObject().setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(final Entry selectedEntry, Highlight highlight) {
+                for(ILineDataSet iLineDataSet : getObject().getLineData().getDataSets()) {
+                    iLineDataSet.setValueFormatter(new IValueFormatter() {
+                        @Override
+                        public String getFormattedValue(float v, Entry entry, int i, ViewPortHandler viewPortHandler) {
+
+                            if(selectedEntry.getY() == entry.getY()) {
+                                return String.valueOf(new LargeValueFormatter().getFormattedValue(v, entry, i, viewPortHandler));
+                            }
+                            return "";
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onNothingSelected() {
+                for(ILineDataSet iLineDataSet : getObject().getLineData().getDataSets()) {
+                    iLineDataSet.setValueFormatter(new LargeValueFormatter());
+                }
+            }
+        });
     }
 
     @BA.Hide
@@ -94,7 +124,7 @@ public class MPLineChartWrapper extends ViewWrapper<LineChart> implements Common
         getObject().getXAxis().setLabelCount(XValues.size());
     }
 
-    public void SetYValues(final List<String> YValues, String title, int textColor, int lineColor, int textSize) {
+    public void SetYValues(final List<String> YValues, String ChartTitle, int ValueTextColor, int LineColor, int ValueTextSize) {
 
         ArrayList<Entry> values = new ArrayList<>();
 
@@ -104,13 +134,13 @@ public class MPLineChartWrapper extends ViewWrapper<LineChart> implements Common
             values.add(new Entry(x, y));
         }
 
-        LineDataSet set = new LineDataSet(values, title);
-        set.setCircleColor(lineColor);
-        set.setColor(lineColor);
-        set.setValueTextColor(textColor);
-        set.setValueTextSize(textSize / 2);
+        LineDataSet set = new LineDataSet(values, ChartTitle);
+        set.setCircleColor(LineColor);
+        set.setColor(LineColor);
+        set.setValueTextColor(ValueTextColor);
+        set.setValueFormatter(new LargeValueFormatter());
+        set.setValueTextSize(ValueTextSize);
         set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-        setTextColor(textColor);
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(set);
@@ -180,7 +210,7 @@ public class MPLineChartWrapper extends ViewWrapper<LineChart> implements Common
         getObject().setBackgroundColor(backgroundColor);
     }
 
-    private void setTextColor(int textColor) {
+    public void setTextColor(int textColor) {
         getObject().getAxisLeft().setTextColor(textColor);
         getObject().getAxisRight().setTextColor(textColor);
         getObject().getXAxis().setTextColor(textColor);

@@ -12,8 +12,15 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.formatter.LargeValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +45,31 @@ public class MPBarChartWrapper extends ViewWrapper<BarChart> implements Common.D
         if (!keepOldObject)
             setObject(new BarChart(ba.context));
         super.innerInitialize(ba, eventName, keepOldObject);
+
+        getObject().setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(final Entry selectedEntry, Highlight highlight) {
+                for(IBarDataSet iBarDataSet : getObject().getBarData().getDataSets()) {
+                    iBarDataSet.setValueFormatter(new IValueFormatter() {
+                        @Override
+                        public String getFormattedValue(float v, Entry entry, int i, ViewPortHandler viewPortHandler) {
+
+                            if(selectedEntry.getY() == entry.getY()) {
+                                return String.valueOf(new LargeValueFormatter().getFormattedValue(v, entry, i, viewPortHandler));
+                            }
+                            return "";
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onNothingSelected() {
+                for(IBarDataSet iBarDataSet : getObject().getBarData().getDataSets()) {
+                    iBarDataSet.setValueFormatter(new LargeValueFormatter());
+                }
+            }
+        });
     }
 
     @BA.Hide
@@ -92,7 +124,7 @@ public class MPBarChartWrapper extends ViewWrapper<BarChart> implements Common.D
         getObject().getXAxis().setLabelCount(XValues.size());
     }
 
-    public void SetYValues(final List<String> YValues, String title, int textColor, int barColor, int textSize) {
+    public void SetYValues(final List<String> YValues, String ChartTitle, int ValueTextColor, int BarColor, int ValueTextSize) {
 
         ArrayList<BarEntry> values = new ArrayList<>();
 
@@ -102,11 +134,12 @@ public class MPBarChartWrapper extends ViewWrapper<BarChart> implements Common.D
             values.add(new BarEntry(x, y));
         }
 
-        BarDataSet set = new BarDataSet(values, title);
-        set.setColor(barColor);
-        set.setValueTextColor(textColor);
-        set.setValueTextSize(textSize / 2);
-        setTextColor(textColor);
+        BarDataSet set = new BarDataSet(values, ChartTitle);
+        set.setColor(BarColor);
+        set.setValueTextColor(ValueTextColor);
+        set.setValueTextSize(ValueTextSize);
+        set.setValueFormatter(new LargeValueFormatter());
+
         ArrayList<IBarDataSet> dataSets = new ArrayList<>();
         dataSets.add(set);
 
@@ -180,7 +213,11 @@ public class MPBarChartWrapper extends ViewWrapper<BarChart> implements Common.D
         getObject().setBackgroundColor(backgroundColor);
     }
 
-    private void setTextColor(int textColor) {
+    public void setVisibleXRangeMaximum(int visibleXRangeMaximum) {
+        getObject().setVisibleXRangeMaximum(visibleXRangeMaximum);
+    }
+
+    public void setTextColor(int textColor) {
         getObject().getAxisLeft().setTextColor(textColor);
         getObject().getAxisRight().setTextColor(textColor);
         getObject().getXAxis().setTextColor(textColor);

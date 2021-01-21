@@ -1,19 +1,28 @@
 package com.microinvest.mpandroidchartlibrarywrapper;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.PieChart;
 
 import com.github.mikephil.charting.components.Legend;
 
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
+import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.formatter.LargeValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.IPieDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,6 +46,31 @@ public class MPPieChartWrapper extends ViewWrapper<PieChart> implements Common.D
         if (!keepOldObject)
             setObject(new PieChart(ba.context));
         super.innerInitialize(ba, eventName, keepOldObject);
+
+        getObject().setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(final Entry selectedEntry, Highlight highlight) {
+                for(IPieDataSet iPieDataSet : getObject().getData().getDataSets()) {
+                    iPieDataSet.setValueFormatter(new IValueFormatter() {
+                        @Override
+                        public String getFormattedValue(float v, Entry entry, int i, ViewPortHandler viewPortHandler) {
+                            if(selectedEntry.getY() == entry.getY()) {
+                                return String.valueOf(new LargeValueFormatter().getFormattedValue(v, entry, i, viewPortHandler));
+                            }
+                            return "";
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onNothingSelected() {
+                for(IPieDataSet iPieDataSet : getObject().getData().getDataSets()) {
+                    iPieDataSet.setValueFormatter(new LargeValueFormatter());
+                }
+            }
+        });
+
     }
 
     @BA.Hide
@@ -76,7 +110,7 @@ public class MPPieChartWrapper extends ViewWrapper<PieChart> implements Common.D
         base.RemoveView();
     }
 
-    public void SetXYValues(final List<String> XValues, final List<String> YValues, String title, int textColor, float textSize) {
+    public void SetXYValues(final List<String> XValues, final List<String> YValues, String ChartTitle, int ValueTextColor, float ValueTextSize) {
         ArrayList<PieEntry> values = new ArrayList<>();
 
         for (int i = 0; i < YValues.size(); i++) {
@@ -85,11 +119,11 @@ public class MPPieChartWrapper extends ViewWrapper<PieChart> implements Common.D
             values.add(new PieEntry(y, x));
         }
 
-        PieDataSet set = new PieDataSet(values, title);
+        PieDataSet set = new PieDataSet(values, ChartTitle);
         set.setColors(ColorTemplate.COLORFUL_COLORS);
-        set.setValueTextSize(textSize / 2);
-        setTextColor(textColor);
-        setTextSize(textSize);
+        set.setValueTextSize(ValueTextSize);
+        set.setValueTextColor(ValueTextColor);
+        set.setValueFormatter(new LargeValueFormatter());
 
         PieData data = new PieData(set);
         getObject().setData(data);
@@ -125,14 +159,14 @@ public class MPPieChartWrapper extends ViewWrapper<PieChart> implements Common.D
         getObject().setBackgroundColor(backgroundColor);
     }
 
-    private void setTextColor(int textColor) {
+    public void setTextColor(int textColor) {
         getObject().setCenterTextColor(textColor);
         getObject().setEntryLabelColor(textColor);
         getObject().getDescription().setTextColor(textColor);
         getObject().getLegend().setTextColor(textColor);
     }
 
-    private void setTextSize(float textSize) {
+    public void setTextSize(float textSize) {
         getObject().setCenterTextSize(textSize);
     }
 
