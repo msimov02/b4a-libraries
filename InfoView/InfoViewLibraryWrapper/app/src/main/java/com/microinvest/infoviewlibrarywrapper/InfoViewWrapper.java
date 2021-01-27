@@ -81,12 +81,24 @@ public class InfoViewWrapper extends ViewWrapper<InfoView> implements Common.Des
         getObject().setTitle(title);
     }
 
+    public void setTitleTextColor(int titleTextColor) {
+        getObject().setTitleTextColor(titleTextColor);
+    }
+
     public void setMessage(String message) {
         getObject().setMessage(message);
     }
 
+    public void setMessageTextColor(int textColor) {
+        getObject().setMessageTextColor(textColor);
+    }
+
     public void setIconDrawable(Object drawable) {
         getObject().setIconDrawable((Drawable) drawable);
+    }
+
+    public void setIconDrawableColor(int color) {
+        getObject().setIconDrawableColor(color);
     }
 
     public void setButtonText(String text) {

@@ -59,6 +59,12 @@ public class InfoView extends RelativeLayout {
         return this;
     }
 
+    public InfoView setTitleTextColor(@ColorInt int textColor) {
+        if (this.title != null)
+            this.title.setTextColor(textColor);
+        return this;
+    }
+
     public InfoView setMessage(String message) {
         if (this.message != null)
             this.message.setText(message);
@@ -71,9 +77,21 @@ public class InfoView extends RelativeLayout {
         return this;
     }
 
+    public InfoView setMessageTextColor(@ColorInt int textColor) {
+        if (this.message != null)
+            this.message.setTextColor(textColor);
+        return this;
+    }
+
     public InfoView setIconDrawable(Drawable iconDrawable) {
         if (this.image != null)
             this.image.setImageDrawable(iconDrawable);
+        return this;
+    }
+
+    public InfoView setIconDrawableColor(int color) {
+        if (this.image != null)
+            this.image.setColorFilter(color);
         return this;
     }
 

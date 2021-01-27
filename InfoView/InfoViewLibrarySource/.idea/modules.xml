@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/InfoView-master.iml" filepath="$PROJECT_DIR$/.idea/modules/InfoView-master.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/InfoView-master.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/InfoView-master.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/infoview/InfoView-master.infoview.iml" filepath="$PROJECT_DIR$/.idea/modules/infoview/InfoView-master.infoview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/InfoViewLibrarySource.iml" filepath="$PROJECT_DIR$/.idea/modules/InfoViewLibrarySource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/InfoViewLibrarySource.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/InfoViewLibrarySource.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/infoview/InfoViewLibrarySource.infoview.iml" filepath="$PROJECT_DIR$/.idea/modules/infoview/InfoViewLibrarySource.infoview.iml" />
     </modules>
   </component>
 </project>
