@@ -17,7 +17,6 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
 import com.github.mikephil.charting.formatter.IValueFormatter;
-import com.github.mikephil.charting.formatter.LargeValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IPieDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
@@ -55,7 +54,7 @@ public class MPPieChartWrapper extends ViewWrapper<PieChart> implements Common.D
                         @Override
                         public String getFormattedValue(float v, Entry entry, int i, ViewPortHandler viewPortHandler) {
                             if(selectedEntry.getY() == entry.getY()) {
-                                return String.valueOf(new LargeValueFormatter().getFormattedValue(v, entry, i, viewPortHandler));
+                                return String.valueOf(new CustomLargeValueFormatter().getFormattedValue(v, entry, i, viewPortHandler));
                             }
                             return "";
                         }
@@ -66,7 +65,7 @@ public class MPPieChartWrapper extends ViewWrapper<PieChart> implements Common.D
             @Override
             public void onNothingSelected() {
                 for(IPieDataSet iPieDataSet : getObject().getData().getDataSets()) {
-                    iPieDataSet.setValueFormatter(new LargeValueFormatter());
+                    iPieDataSet.setValueFormatter(new CustomLargeValueFormatter());
                 }
             }
         });
@@ -123,7 +122,7 @@ public class MPPieChartWrapper extends ViewWrapper<PieChart> implements Common.D
         set.setColors(ColorTemplate.COLORFUL_COLORS);
         set.setValueTextSize(ValueTextSize);
         set.setValueTextColor(ValueTextColor);
-        set.setValueFormatter(new LargeValueFormatter());
+        set.setValueFormatter(new CustomLargeValueFormatter());
 
         PieData data = new PieData(set);
         getObject().setData(data);
@@ -172,5 +171,9 @@ public class MPPieChartWrapper extends ViewWrapper<PieChart> implements Common.D
 
     public void setHoleRadius(float holeRadius) {
         getObject().setHoleRadius(holeRadius);
+    }
+
+    public void setDrawHoleEnabled(boolean drawHoleEnabled) {
+        getObject().setDrawHoleEnabled(drawHoleEnabled);
     }
 }

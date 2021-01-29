@@ -16,9 +16,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import com.github.mikephil.charting.formatter.IValueFormatter;
-import com.github.mikephil.charting.formatter.LargeValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ViewPortHandler;
@@ -55,8 +53,8 @@ public class MPLineChartWrapper extends ViewWrapper<LineChart> implements Common
                         @Override
                         public String getFormattedValue(float v, Entry entry, int i, ViewPortHandler viewPortHandler) {
 
-                            if(selectedEntry.getY() == entry.getY()) {
-                                return String.valueOf(new LargeValueFormatter().getFormattedValue(v, entry, i, viewPortHandler));
+                            if(selectedEntry.getX() == entry.getX()) {
+                                return String.valueOf(new CustomLargeValueFormatter().getFormattedValue(v, entry, i, viewPortHandler));
                             }
                             return "";
                         }
@@ -67,7 +65,7 @@ public class MPLineChartWrapper extends ViewWrapper<LineChart> implements Common
             @Override
             public void onNothingSelected() {
                 for(ILineDataSet iLineDataSet : getObject().getLineData().getDataSets()) {
-                    iLineDataSet.setValueFormatter(new LargeValueFormatter());
+                    iLineDataSet.setValueFormatter(new CustomLargeValueFormatter());
                 }
             }
         });
@@ -138,7 +136,7 @@ public class MPLineChartWrapper extends ViewWrapper<LineChart> implements Common
         set.setCircleColor(LineColor);
         set.setColor(LineColor);
         set.setValueTextColor(ValueTextColor);
-        set.setValueFormatter(new LargeValueFormatter());
+        set.setValueFormatter(new CustomLargeValueFormatter());
         set.setValueTextSize(ValueTextSize);
         set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 

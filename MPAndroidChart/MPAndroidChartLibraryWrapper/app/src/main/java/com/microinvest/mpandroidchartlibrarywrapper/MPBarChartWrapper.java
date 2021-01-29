@@ -22,6 +22,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,9 +54,8 @@ public class MPBarChartWrapper extends ViewWrapper<BarChart> implements Common.D
                     iBarDataSet.setValueFormatter(new IValueFormatter() {
                         @Override
                         public String getFormattedValue(float v, Entry entry, int i, ViewPortHandler viewPortHandler) {
-
-                            if(selectedEntry.getY() == entry.getY()) {
-                                return String.valueOf(new LargeValueFormatter().getFormattedValue(v, entry, i, viewPortHandler));
+                            if(selectedEntry.getX() == entry.getX()) {
+                                return String.valueOf(new CustomLargeValueFormatter().getFormattedValue(v, entry, i, viewPortHandler));
                             }
                             return "";
                         }
@@ -66,7 +66,7 @@ public class MPBarChartWrapper extends ViewWrapper<BarChart> implements Common.D
             @Override
             public void onNothingSelected() {
                 for(IBarDataSet iBarDataSet : getObject().getBarData().getDataSets()) {
-                    iBarDataSet.setValueFormatter(new LargeValueFormatter());
+                    iBarDataSet.setValueFormatter(new CustomLargeValueFormatter());
                 }
             }
         });
@@ -135,10 +135,10 @@ public class MPBarChartWrapper extends ViewWrapper<BarChart> implements Common.D
         }
 
         BarDataSet set = new BarDataSet(values, ChartTitle);
+        set.setValueFormatter(new CustomLargeValueFormatter());
         set.setColor(BarColor);
         set.setValueTextColor(ValueTextColor);
         set.setValueTextSize(ValueTextSize);
-        set.setValueFormatter(new LargeValueFormatter());
 
         ArrayList<IBarDataSet> dataSets = new ArrayList<>();
         dataSets.add(set);
