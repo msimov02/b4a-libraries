@@ -9,5 +9,5 @@ MPAndroidChart is a B4A library for charting.
 ![MPBarChart](https://i.imgur.com/Bl0fd4Q.png)
 
 ## Usage
-1. Copy all the files from MPAndroidChartLibraries and paste them inside your B4A Additional Libraries folder.
+1. Copy all the files from MPAndroidChartAdditionalLibraries and paste them inside your B4A Additional Libraries folder.
 2. In your B4A Project navigate to the Libraries Manager and add the MPAndroidChart Library.

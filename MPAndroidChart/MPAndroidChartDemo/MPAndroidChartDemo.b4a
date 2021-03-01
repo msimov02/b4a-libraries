@@ -9,7 +9,7 @@ Module1=Starter
 NumberOfFiles=1
 NumberOfLibraries=2
 NumberOfModules=1
-Version=10.5
+Version=10.6
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: B4A Example
@@ -55,11 +55,18 @@ Sub Activity_Create(FirstTime As Boolean)
 	YValues.Add("120")
 	YValues.Add("80")
 	
+	Dim LineChartXValues As List
+	LineChartXValues.Initialize
+	LineChartXValues.Add("1")
+	LineChartXValues.Add("2")
+	LineChartXValues.Add("3")
+	LineChartXValues.Add("4")
+	LineChartXValues.Add("5")
+	
 	MPPieChart.SetXYValues(XValues, YValues, "Title", Colors.Black, 26)
 	MPBarChart.SetXValues(XValues)
 	MPBarChart.SetYValues(YValues, "Title", Colors.Black, Colors.Red, 26)
-	MPLineChart.SetXValues(XValues)
-	MPLineChart.SetYValues(YValues, "Title", Colors.Black, Colors.Red, 26)
+	MPLineChart.SetXYValues(LineChartXValues, YValues, "Title", Colors.Black, Colors.Red, 26)
 End Sub
 
 Sub Activity_Resume

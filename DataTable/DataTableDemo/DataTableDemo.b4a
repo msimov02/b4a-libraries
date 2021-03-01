@@ -1,0 +1,76 @@
+﻿Build1=Default,b4a.example
+File1=DataTable.bal
+FileGroup1=Default Group
+Group=Default Group
+Library1=core
+Library2=datatable
+Library3=xui
+Library4=designsupport
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="29"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.LightTheme)~\n~'End of default text.~\n~
+Module1=Starter
+NumberOfFiles=1
+NumberOfLibraries=4
+NumberOfModules=1
+Version=10.6
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: B4A Example
+	#VersionCode: 1
+	#VersionName: 
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: True
+#End Region
+
+Sub Process_Globals
+
+End Sub
+
+Sub Globals
+	Private DataTable As DataTable
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	Activity.LoadLayout("DataTable")
+	
+	Dim COLUMN_COUNT As Int = 3
+	Dim ROW_COUNT As Int = 100
+	
+	DataTable.HeaderGravity = "CENTER"
+	DataTable.HeaderVerticalPadding = 16dip
+	DataTable.HeaderHorizontalPadding = 0dip
+	DataTable.HeaderTextSize = 14
+	DataTable.HeaderTextColor = Colors.RGB(250, 250, 250)
+	DataTable.HeaderBackgroundColor = Colors.RGB(247, 102, 94)
+
+	DataTable.RowGravity = "CENTER"
+	DataTable.RowVerticalPadding = 16dip
+	DataTable.RowHorizontalPadding = 0dip
+	DataTable.RowTextSize = 14
+	DataTable.RowTextColor = Colors.RGB(34, 34, 34)
+	DataTable.RowBackgroundColor = Colors.RGB(255, 255, 255)
+
+	DataTable.PersianNumber = False
+	DataTable.CornerRadius = 8dip
+	DataTable.Direction = "LRT"
+	DataTable.Shadow = 8dip
+
+	DataTable.TestHeaders = COLUMN_COUNT 'Use DataTable.Headers to use real values.
+	DataTable.setTestRows(ROW_COUNT, COLUMN_COUNT) 'Use DataTable.Rows to use real values.
+	
+	DataTable.Inflate 'This should be called to apply the Headers and Rows.
+End Sub
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+
