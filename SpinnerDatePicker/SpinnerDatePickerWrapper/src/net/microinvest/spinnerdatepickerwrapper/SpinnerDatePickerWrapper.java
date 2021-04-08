@@ -30,7 +30,7 @@ public class SpinnerDatePickerWrapper {
                 .callback(new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(com.tsongkha.spinnerdatepicker.DatePicker datePicker, int i, int i1, int i2) {
-                        ba.raiseEventFromUI(datePicker, eventName + "_dateselected", i, i1, i2);
+                        ba.raiseEventFromUI(datePicker, eventName + "_dateselected", i, i1 + 1, i2);
                     }
                 })
                 .onCancel(new DatePickerDialog.OnDateCancelListener() {
@@ -40,7 +40,7 @@ public class SpinnerDatePickerWrapper {
                     }
                 })
                 .customTitle(title)
-                .defaultDate(year, monthOfYear, dayOfMonth)
+                .defaultDate(year, monthOfYear - 1, dayOfMonth)
                 .build()
                 .show();
     }
