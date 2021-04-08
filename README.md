@@ -25,3 +25,5 @@ SmoothDateRangePicker is a library for selecting date range.
 SpinnerDatePicker is a library for selecting date with a spinner style dialog.
 ### [TileProgressView](https://github.com/msimov/b4a-libraries/tree/main/TileProgressView)
 TileProgressView is a simple progress view with tile animation.
+### [Dolly](https://github.com/msimov/b4a-libraries/tree/main/Dolly)
+Dolly is a library that combines SharedPreferences and EncryptedSharedPreferences in one place.

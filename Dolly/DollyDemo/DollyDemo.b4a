@@ -1,0 +1,132 @@
+﻿Build1=Default,b4a.example
+File1=Dolly.bal
+FileGroup1=Default Group
+Group=Default Group
+Library1=core
+Library2=dolly
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="29"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.LightTheme)~\n~'End of default text.~\n~
+Module1=Starter
+NumberOfFiles=1
+NumberOfLibraries=2
+NumberOfModules=1
+Version=10.7
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: B4A Example
+	#VersionCode: 1
+	#VersionName: 
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: True
+#End Region
+
+Sub Process_Globals
+	
+End Sub
+
+Sub Globals
+	Private Dolly As Dolly
+	
+	Private Name As Label
+	Private LastName As Label
+	Private Age As Label
+	Private Height As Label
+	Private Weight As Label
+	Private IsVegan As Label
+	Private FavoriteFoods As Label
+	Private BodyAtoms As Label
+	
+	Private SetValues As Button
+	Private GetValues As Button
+	
+	Private RemoveAllValues As Button
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	
+	Activity.LoadLayout("Dolly")
+	
+	Dolly.Initialize
+	
+End Sub
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+
+Private Sub SetValues_Click
+	
+	Dim NameValue As String = "Martin"
+	Dim AgeValue As Int = 18
+	Dim HeightValue As Float = 1.83
+	Dim WeightValue As Double = 70.64
+	Dim IsVeganValue As Boolean = False
+	Dim FavoriteFoodsValue As List = ArrayToList(Array As String("Pizza", "Pineapple", "Chicken nuggets"))
+	Dim BodyAtomsValue As Long = 9223372036854775807
+	
+	
+	Dolly.putString("Name", NameValue, "ENCRYPT")
+	Dolly.putInt("Age", AgeValue, "ENCRYPT")
+	Dolly.putFloat("Height", HeightValue, "ENCRYPT")
+	Dolly.putDouble("Weight", WeightValue, "ENCRYPT")
+	Dolly.putBoolean("IsVegan", IsVeganValue, "NOT_ENCRYPTED")
+	Dolly.putStringSet("FavoriteFoods", FavoriteFoodsValue, "NOT_ENCRYPTED")
+	Dolly.putLong("BodyAtmos", BodyAtomsValue, "NOT_ENCRYPTED")
+End Sub
+
+Private Sub RemoveAllValues_Click
+	Dolly.removeAll
+End Sub
+
+Private Sub GetValues_Click
+	
+	ResetLabels
+	
+	Name.Text = Name.Text & Dolly.getString("Name", "ENCRYPT")
+	LastName.Text = LastName.Text & Dolly.getStringWithDefault("LastName", "No Last Name", "NOT_ENCRYPTED")
+	Age.Text = Age.Text & Dolly.getInt("Age", "ENCRYPT")
+	Height.Text = Height.Text & Dolly.getFloat("Height", "ENCRYPT")
+	Weight.Text = Weight.Text & Dolly.getDouble("Weight", "ENCRYPT")
+	IsVegan.Text = IsVegan.Text & Dolly.getBoolean("IsVegan", "NOT_ENCRYPTED")
+	
+	Dim FavoriteFoodsList As List = Dolly.getStringSetWithDefault("FavoriteFoods", ArrayToList(Array As String("No Favorite Foods")),"NOT_ENCRYPTED")
+	For Each FavoriteFood As String In FavoriteFoodsList
+		If FavoriteFoodsList.IndexOf(FavoriteFood) = 0 Then
+			FavoriteFoods.Text = FavoriteFoods.Text & FavoriteFood
+		Else
+			FavoriteFoods.Text = FavoriteFoods.Text & ", " & FavoriteFood
+		End If
+	Next
+	
+	BodyAtoms.Text = BodyAtoms.Text & Dolly.getLong("BodyAtmos", "NOT_ENCRYPTED")
+	
+End Sub
+
+Private Sub ArrayToList(Input() As String) As List
+	Dim Output As List
+	Output.Initialize
+	Output.AddAll(Input)
+	
+	Return Output
+End Sub
+
+Private Sub ResetLabels
+	Name.Text = "Name: "
+	LastName.Text = "Last Name: "
+	Age.Text = "Age: "
+	Height.Text = "Height: "
+	Weight.Text = "Weight: "
+	IsVegan.Text = "Is Vegan: "
+	FavoriteFoods.Text = "Favorite Foods: "
+	BodyAtoms.Text = "Body Atoms: "
+End Sub
+
